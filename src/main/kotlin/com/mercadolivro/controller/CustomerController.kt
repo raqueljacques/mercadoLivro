@@ -2,6 +2,7 @@ package com.mercadolivro.controller
 
 import com.mercadolivro.controller.request.PostCustomerRequest
 import com.mercadolivro.controller.request.PutCustomerRequest
+import com.mercadolivro.extension.toCustomerModel
 import com.mercadolivro.model.CustomerModel
 import com.mercadolivro.service.CustomerService
 import org.springframework.http.HttpStatus
@@ -33,7 +34,7 @@ class CustomerController(
     //Mudando o tipo de status do retorno da requisição
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@RequestBody customer: PostCustomerRequest) {
-        customerService.create(customer)
+        customerService.create(customer.toCustomerModel())
     }
 
     //como receber parâmetro pela url
@@ -45,7 +46,7 @@ class CustomerController(
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun updateCustomer(@PathVariable id:String, @RequestBody customer: PutCustomerRequest) {
-        customerService.updateCustomer(id, customer)
+        customerService.update(customer.toCustomerModel(id))
     }
 
     @DeleteMapping("/{id}")
