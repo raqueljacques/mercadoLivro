@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
+import java.util.*
 
 //Deixando claro para o spring que é uma classe controlador
 @RestController
@@ -39,19 +40,19 @@ class CustomerController(
 
     //como receber parâmetro pela url
     @GetMapping("/{id}")
-    fun getCustomer(@PathVariable id:String): CustomerModel {
+    fun getCustomer(@PathVariable id:Int): CustomerModel {
         return customerService.getCustomer(id)
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun updateCustomer(@PathVariable id:String, @RequestBody customer: PutCustomerRequest) {
+    fun updateCustomer(@PathVariable id:Int, @RequestBody customer: PutCustomerRequest) {
         customerService.update(customer.toCustomerModel(id))
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteCustomer(@PathVariable id:String){
+    fun deleteCustomer(@PathVariable id:Int){
         customerService.deleteCustomer(id)
     }
 
