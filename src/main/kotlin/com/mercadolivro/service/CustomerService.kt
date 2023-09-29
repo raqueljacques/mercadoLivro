@@ -1,20 +1,15 @@
 package com.mercadolivro.service
 
-import com.mercadolivro.controller.request.PostCustomerRequest
-import com.mercadolivro.controller.request.PutCustomerRequest
 import com.mercadolivro.model.CustomerModel
 import com.mercadolivro.repository.CustomerRepository
 import org.springframework.stereotype.Service
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestParam
-import java.util.*
+import java.lang.Exception
 
 @Service
 class CustomerService(
-    val customerRepository: CustomerRepository
+    val customerRepository: CustomerRepository,
+    val bookService: BookService
 ) {
-    val customers = mutableListOf<CustomerModel>()
 
     fun getAll(name: String?): List<CustomerModel> {
         name?.let {
@@ -27,23 +22,29 @@ class CustomerService(
         customerRepository.save(customer)
     }
 
-    fun getCustomer(id:Int): CustomerModel {
+    fun findById(id: Int): CustomerModel {
         return customerRepository.findById(id).orElseThrow()
     }
 
     fun update(customer: CustomerModel) {
-        if (!customerRepository.existsById(customer.id!!)) {
+        if(!customerRepository.existsById(customer.id!!)){
             throw Exception()
         }
 
         customerRepository.save(customer)
     }
 
-    fun deleteCustomer(id:Int){
-        if (!customerRepository.existsById(id)) {
+    fun delete(id: Int) {
+        val customer = findById(id)
+        bookService.deleteByCustomer(customer)
+        if(!customerRepository.existsById(id)){
             throw Exception()
         }
 
+        //Verificar se tem livro associado pra não fazer o delete e sim desativar o usuário
         customerRepository.deleteById(id)
     }
+
+    //Delete em cascata pra não mudar o status e sim apagar todos os livros associados e o usuaŕio
+
 }

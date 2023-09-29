@@ -40,8 +40,8 @@ class CustomerController(
 
     //como receber parâmetro pela url
     @GetMapping("/{id}")
-    fun getCustomer(@PathVariable id:Int): CustomerModel {
-        return customerService.getCustomer(id)
+    fun getCustomer(@PathVariable id: Int): CustomerModel {
+        return customerService.findById(id)
     }
 
     @PutMapping("/{id}")
@@ -52,8 +52,8 @@ class CustomerController(
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteCustomer(@PathVariable id:Int){
-        customerService.deleteCustomer(id)
+    fun delete(@PathVariable id: Int) {
+        customerService.delete(id)
     }
 
 
