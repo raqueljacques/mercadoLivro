@@ -12,7 +12,6 @@ import java.lang.Exception
 @Service
 class CustomerService(
     val customerRepository: CustomerRepository,
-    val bookRepository: BookRepository,
     val bookService: BookService
 ) {
 
@@ -48,6 +47,10 @@ class CustomerService(
         customerRepository.save(customer)
     }
 
-    //Delete em cascata pra não mudar o status e sim apagar todos os livros associados e o usuaŕio
+    fun emailAvailable(value: String): Boolean {
+        return !customerRepository.existsByEmail(value)
+    }
+
+    //TODO Delete em cascata pra não mudar o status e sim apagar todos os livros associados e o usuaŕio
 
 }
