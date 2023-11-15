@@ -26,7 +26,7 @@ class BookService(
     }
 
     fun findById(id: Int): BookModel {
-        return bookRepository.findById(id).orElseThrow()
+        return bookRepository.findById(id).orElseThrow{ Exception("Book [$id] not exists")}
     }
 
     fun delete(id: Int) {
