@@ -7,6 +7,7 @@ import com.mercadolivro.extension.toCustomerModel
 import com.mercadolivro.extension.toResponse
 import com.mercadolivro.service.CustomerService
 import org.springframework.http.HttpStatus
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
@@ -26,7 +27,7 @@ class CustomerController(
     @PostMapping
     //Mudando o tipo de status do retorno da requisição
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody customer: PostCustomerRequest) {
+    fun create(@RequestBody @Validated customer: PostCustomerRequest) {
         customerService.create(customer.toCustomerModel())
     }
 
