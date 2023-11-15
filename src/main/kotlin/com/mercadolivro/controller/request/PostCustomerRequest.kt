@@ -4,8 +4,9 @@ import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotEmpty
 
 data class PostCustomerRequest (
-    @field:NotEmpty(message = "Invalid name")
+    @field:NotEmpty(message = "Nome deve ser informado")
     var name: String,
-    @field:Email(message = "Invalid email")
+
+    @field:Email(message = "E-mail deve ser válido")
     var email: String
 )
