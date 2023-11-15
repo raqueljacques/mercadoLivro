@@ -5,6 +5,7 @@ enum class Errors (
 ){
     //Start books erros
     ML101("ML-101", "Book [%s] not exists"),
+    ML102("ML-102", "Cannot delete book with status [%s]"),
     //End books erros
 
     //Start customers erros
