@@ -10,6 +10,7 @@ data class PostPurchaseRequest (
     val customerId: Int,
 
     @field:NotNull
+    //TODO Set is a collection that does not allow duplicates
     val bookIds: Set<Int>
 
 )
