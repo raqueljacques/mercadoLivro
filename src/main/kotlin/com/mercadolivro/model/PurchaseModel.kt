@@ -4,6 +4,7 @@ import jakarta.persistence.*
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
+@Entity(name = "purchase")
 data class PurchaseModel(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +20,7 @@ data class PurchaseModel(
         joinColumns = [JoinColumn(name = "purchase_id")],
         inverseJoinColumns = [JoinColumn(name = "book_id")]
     )
-    val books: List<BookModel>,
+    val books: MutableList<BookModel>,
 
     @Column
     val nfe: String? = null,
