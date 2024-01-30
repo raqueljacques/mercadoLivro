@@ -29,6 +29,7 @@ dependencies {
 	runtimeOnly("com.mysql:mysql-connector-j")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-security")
 
 	// Add Spring Doc dependencies
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4")
