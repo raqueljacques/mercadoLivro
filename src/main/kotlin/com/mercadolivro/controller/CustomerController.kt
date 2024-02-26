@@ -17,7 +17,7 @@ import java.util.*
 //Definindo um caminho para o controlador
 @RequestMapping("customers")
 class CustomerController(
-    val customerService: CustomerService
+    private val customerService: CustomerService
     //val authenticationManager: AuthenticationManager,
     //val tokenService: TokenService
 ) {
