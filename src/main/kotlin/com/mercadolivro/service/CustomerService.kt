@@ -26,6 +26,7 @@ class CustomerService(
     }
 
     fun create(customer: CustomerModel) {
+        //TODO: Verificar se o email já existe
         val customerCopy = customer.copy(
             roles = setOf(Profile.CUSTOMER),
             password = bCryptPasswordEncoder.encode(customer.password)

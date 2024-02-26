@@ -11,12 +11,15 @@ import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
+
 //Deixando claro para o spring que é uma classe controlador
 @RestController
 //Definindo um caminho para o controlador
 @RequestMapping("customers")
 class CustomerController(
     val customerService: CustomerService
+    //val authenticationManager: AuthenticationManager,
+    //val tokenService: TokenService
 ) {
     @GetMapping
     //RequestParam para pegar algum parâmetro da url (criação de um filtro pelo nome)
@@ -30,6 +33,14 @@ class CustomerController(
     fun create(@RequestBody @Validated customer: PostCustomerRequest) {
         customerService.create(customer.toCustomerModel())
     }
+
+//    @PostMapping("/login")
+//    fun login(@RequestBody data: @Valid LoginRequest): ResponseEntity<*>? {
+//        val usernamePassword = UsernamePasswordAuthenticationToken(data.email, data.password)
+//        val auth: Authentication? = authenticationManager.authenticate(usernamePassword)
+//        val token: Token? = tokenService.allocateToken(auth.toString())
+//        return ResponseEntity.ok<Any>(LoginResponse(token))
+//    }
 
     //como receber parâmetro pela url
     @GetMapping("/{id}")
